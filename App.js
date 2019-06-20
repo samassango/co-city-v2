@@ -25,10 +25,26 @@ import { StyleSheet, Text, View, Button } from "react-native";
 // import EntypoIcon from "@expo/vector-icons/Entypo";
 
 import AppContainer from "./AppNavigator";
+import ConfigureStore from "./configureStore";
+import { Provider } from "react-redux";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
 
 export default class App extends React.Component {
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      ...Ionicons.font
+    });
+  }
   render() {
-    return <AppContainer />;
+    //const store = ConfigureStore();
+    return (
+      // <Provider store={store}>
+      <AppContainer />
+      // </Provider>
+    );
   }
 }
 
