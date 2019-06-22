@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 
-const Reducers = combineReducers({ login: { username: "sibusiso" } });
+const Reducers = combineReducers({ });
 
 export default Reducers;
