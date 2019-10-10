@@ -11,7 +11,7 @@ import { AppLoading } from "expo";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true };
+    this.state = { loading: true, store: ConfigureStore() };
   }
   async componentDidMount() {
     await Font.loadAsync({
@@ -25,11 +25,11 @@ export default class App extends React.Component {
     if (this.state.loading) {
       return <AppLoading />;
     }
-    //const store = ConfigureStore();
+
     return (
-      // <Provider store={store}>
-      <AppContainer />
-      // </Provider>
+      <Provider store={this.state.store}>
+        <AppContainer />
+      </Provider>
     );
   }
 }

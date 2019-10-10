@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { connect } from "react-redux";
 
 import styles from "./styles";
 const bg = require("../../../assets/BG_2.png");
@@ -30,20 +30,24 @@ import {
   Spinner
 } from "native-base";
 import * as Animatable from "react-native-animatable";
+import * as actions from "../../actions";
 
-export default class WelcomeScreen extends React.Component {
+class WelcomeScreen extends React.Component {
+  state = {
+    username: "",
+    password: ""
+  };
+  componentDidMount() {}
+  loginHandler = () => {
+    console.log(this.state);
+    this.props.authenticateUser(this.state.username, this.state.password);
+  };
   render() {
+    console.log("state", this.props);
+    if (!!this.props.login.currentUser) {
+      this.props.navigation.navigate("Dashboard");
+    }
     return (
-      // <View style={styles.container}>
-      //   <Button
-      //     title="Login"
-      //     onPress={() => this.props.navigation.navigate("Dashboard")}
-      //   />
-      //   <Button
-      //     title="Signup"
-      //     onPress={() => this.props.navigation.navigate("SignUp")}
-      //   />
-      // </View>
       <Container>
         <Content scrollEnabled={false} bounces={false}>
           <KeyboardAvoidingView behavior="padding">
@@ -103,7 +107,7 @@ export default class WelcomeScreen extends React.Component {
                   block
                   primary
                   style={styles.loginBtn}
-                  onPress={() => this.props.navigation.navigate("Dashboard")}
+                  onPress={this.loginHandler.bind(this)}
                 >
                   <Text
                     style={
@@ -145,11 +149,15 @@ export default class WelcomeScreen extends React.Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center"
-//   },
-// });
+const mapStateToProps = state => ({
+  login: state.login
+});
+const mapDispatchToProps = dispatch => ({
+  authenticateUser: (username, password) =>
+    dispatch(actions.authenticateUser(username, password))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WelcomeScreen);

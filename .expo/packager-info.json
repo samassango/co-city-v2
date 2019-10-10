@@ -1,10 +1,10 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 15509,
+  "expoServerNgrokUrl": "https://m8-u2r.samassango.co-city-v2.exp.direct",
+  "packagerNgrokUrl": "https://packager.m8-u2r.samassango.co-city-v2.exp.direct",
+  "ngrokPid": 15518,
   "webpackServerPort": null,
-  "devToolsPort": 19003
+  "devToolsPort": 19002
 }

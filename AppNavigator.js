@@ -216,7 +216,7 @@ const ProfileStack = createStackNavigator(
 
 const AuthStack = createStackNavigator(
   {
-    Login: { screen: Login },
+    Login: { screen: WelcomeScreen },
     SignUp: { screen: SignUp }
   },
   {
