@@ -1,7 +1,7 @@
 {
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 21434,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://m8-u2r.samassango.co-city-v2.exp.direct",
   "packagerNgrokUrl": "https://packager.m8-u2r.samassango.co-city-v2.exp.direct",
   "ngrokPid": 21451,
