@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { AsyncStorage } from "react-native";
 
 import AppContainer from "./AppNavigator";
 import ConfigureStore from "./configureStore";
@@ -22,6 +22,7 @@ export default class App extends React.Component {
     this.setState({ loading: false });
   }
   render() {
+    // AsyncStorage.clear();
     if (this.state.loading) {
       return <AppLoading />;
     }

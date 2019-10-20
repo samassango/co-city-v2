@@ -16,7 +16,7 @@ import {
   Picker
 } from "native-base";
 
-import * as actions from "../../actions";
+import * as actions from "../../actions/signup.actions";
 import styles from "./styles";
 
 import { validateEmail } from "../../utils/utilsHelper";

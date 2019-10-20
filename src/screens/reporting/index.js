@@ -36,7 +36,7 @@ import * as ImagePicker from "expo-image-picker";
 const primary = require("../../utils/theme").brandPrimary;
 
 import styles from "./styles";
-import * as actions from "../../actions";
+import { ReportingAction } from "../../actions";
 import * as sqliteHelper from "../../utils/sqliteHelper";
 
 class ReportingIncident extends React.Component {
@@ -72,7 +72,8 @@ class ReportingIncident extends React.Component {
       accessToken: this.props.currentUser.id,
       tshwaneUserId: this.props.currentUser.userId
     });
-
+    const category = this.props.navigation.getParam("params", null);
+    this.props.selectedCategory(category);
     //creating history table if it doesnt exist
     //createTBLHistory(sqLiteDataSorce);
 
@@ -88,6 +89,8 @@ class ReportingIncident extends React.Component {
   }
 
   componentDidMount() {
+    this.props.navigation.getParam("params", null);
+
     sqliteHelper.createTBLStatusLog(sqliteHelper.sqLiteDataSorce);
 
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -552,14 +555,14 @@ class ReportingIncident extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   loadCategoriesTypeRequest: categoryId =>
-    dispatch(actions.loadCategoriesTypeRequest(categoryId)),
+    dispatch(ReportingAction.loadCategoriesTypeRequest(categoryId)),
   reportIncidents: (incidentsObject, accessToken) =>
-    dispatch(actions.reportIncidents(incidentsObject, accessToken)),
+    dispatch(ReportingAction.reportIncidents(incidentsObject, accessToken)),
   loadPostCaseHistoryRequest: (params, accessToken) =>
-    dispatch(actions.loadPostCaseHistoryRequest(params, accessToken))
+    dispatch(ReportingAction.loadPostCaseHistoryRequest(params, accessToken)),
+  selectedCategory: params => dispatch(ReportingAction.selectedCategory(params))
 });
 const mapStateToProps = state => ({
-  appState: state,
   profile: state.profile.profile,
   currentUser: state.login.currentUser,
   isLoading: state.reporting.isLoading,

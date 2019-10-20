@@ -14,7 +14,7 @@ import {
 import { Image, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
-import * as actions from "../../actions";
+import { NotificationAction } from "../../actions";
 import { sortObjectArrayDesc } from "../../utils/utilsHelper";
 import styles from "./styles";
 class IncidentAlert extends React.Component {
@@ -42,7 +42,7 @@ class IncidentAlert extends React.Component {
     let rowListItems = [];
     if (!!this.props.notifications) {
       const newNotific = sortObjectArrayDesc(this.props.notifications);
-      
+
       const renderRowItem = rowItem => {
         return (
           <ListItem key={rowItem.id} avatar>
@@ -81,10 +81,10 @@ class IncidentAlert extends React.Component {
           </ListItem>
         );
       };
-      
+
       rowListItems = newNotific.map(rowItem => renderRowItem(rowItem));
     }
-    
+
     console.log("notifications", this.props);
     return (
       <Container>
@@ -101,9 +101,9 @@ class IncidentAlert extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   loadNotificationsRequest: accessToken =>
-    dispatch(actions.loadNotificationsRequest(accessToken)),
+    dispatch(NotificationAction.loadNotificationsRequest(accessToken)),
   expoPushNotification: (title, message, username) =>
-    dispatch(actions.expoPushNotification(title, message, username))
+    dispatch(NotificationAction.expoPushNotification(title, message, username))
 });
 
 const mapStateToProps = state => ({

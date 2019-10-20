@@ -13,26 +13,29 @@ import {
 } from "native-base";
 
 import styles from "./styles";
-import * as actions from "../../actions";
+import * as actions from "../../actions/profile.actions";
 
 class Profile extends React.Component {
   componentDidMount() {
-    // console.log("currentUser",this.props.currentUser);
-    this.props.loadProfileRequest(
-      this.props.currentUser.id,
-      this.props.currentUser.userId
-    );
+    console.log("currentUser", this.props.currentUser);
+
+    const { id, userId } = this.props.currentUser;
+
+    const { profile } = this.props.profile;
+
+    if (profile === null || profile === undefined) {
+      this.props.loadProfileRequest(id, userId);
+    }
   }
   render() {
     let profileImage = null;
-    console.log("profile", this.props.profile.profile);
-    if (this.props.profile.profile !== null) {
-      if ("images" in this.props.profile.profile) {
-        console.log("profile", this.props.profile.profile);
-        // if(this.props.profile.profile.images.imageString !== undefined){
-
-        profileImage = this.props.profile.profile.images.imageString;
-        //}
+    console.log("profile", this.props);
+    const { profile } = this.props.profile;
+    if (profile !== null) {
+      if ("images" in profile) {
+        if (profile.images.imageString !== undefined) {
+          profileImage = profile.images.imageString;
+        }
       }
     }
 

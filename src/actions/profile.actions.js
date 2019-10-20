@@ -26,7 +26,7 @@ export const loadProfileDeviceUpdateRequest = (
   deviceToken
 ) => dispatch => {
   let requestApi =
-    apiRequest.sercviceBaseUrl +
+    apiRequest.baseUrl +
     "/TshwaneUsers/" +
     userId +
     "?access_token=" +
@@ -54,7 +54,7 @@ export const loadProfileDeviceUpdateRequest = (
 };
 
 export const loadProfileRequest = (accessToken, userId) => dispatch => {
-  let requestUrl = apiRequest.sercviceBaseUrl + apiRequest.authenticate.profile;
+  let requestUrl = apiRequest.baseUrl + apiRequest.user.profile;
   let sourceRequestUrl =
     getAbsoluteApiUrl(requestUrl, { id: userId }) +
     "?access_token=" +
@@ -90,7 +90,7 @@ export const loadProfileUpdateError = error => ({
 });
 
 export const loadProfileUpdateRequest = (accessToken, params) => dispatch => {
-  let requestUrl = apiRequest.sercviceBaseUrl + apiRequest.authenticate.profile;
+  let requestUrl = apiRequest.baseUrl + apiRequest.user.profile;
   let sourceRequestUrl =
     getAbsoluteApiUrl(requestUrl, { id: params.userId }) +
     "?access_token=" +
@@ -121,7 +121,7 @@ export const _updateUserDeviceId = (
   diviceId
 ) => dispatch => {
   let requestApi =
-    apiRequest.sercviceBaseUrl +
+    apiRequest.baseUrl +
     "/TshwaneUsers/" +
     userId +
     "?access_token=" +
@@ -160,7 +160,7 @@ export const loadListOfPlacesError = error => ({
 });
 
 export const loadListOfPlacesRequest = () => dispatch => {
-  let requestUrl = apiRequest.sercviceBaseUrl + apiRequest.suburbs;
+  let requestUrl = apiRequest.baseUrl + apiRequest.suburbs;
   try {
     return fetch(requestUrl, {
       method: "GET",
@@ -189,7 +189,7 @@ export const loadProfilePasswordResetRequest = (
   accessToken,
   params
 ) => dispatch => {
-  let requestUrl = apiRequest.sercviceBaseUrl + apiRequest.authenticate.profile;
+  let requestUrl = apiRequest.baseUrl + apiRequest.user.profile;
   let sourceRequestUrl =
     getAbsoluteApiUrl(requestUrl, { id: params.userId }) +
     "?access_token=" +

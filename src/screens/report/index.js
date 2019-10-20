@@ -4,9 +4,11 @@ import { StyleSheet, View } from "react-native";
 import { TouchableOpacity, Platform, ImageBackground } from "react-native";
 import { Container, Content, Text } from "native-base";
 import { Grid, Col, Row } from "react-native-easy-grid";
-import styles from "./styles";
+import { connect } from "react-redux";
 
-export default class IncidentReport extends React.Component {
+import styles from "./styles";
+import * as actions from "../../actions/profile.actions";
+class IncidentReport extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,6 +75,13 @@ export default class IncidentReport extends React.Component {
       lstCategories: []
     };
   }
+  componentDidMount() {
+    this.props.loadProfileRequest(
+      this.props.currentUser.id,
+      this.props.currentUser.userId
+    );
+  }
+
   render() {
     return (
       <Container>
@@ -291,3 +300,18 @@ export default class IncidentReport extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  loadProfileRequest: (token, userId) =>
+    dispatch(actions.loadProfileRequest(token, userId))
+});
+
+const mapStateToProps = state => ({
+  profile: state.profile.profile,
+  currentUser: state.login.currentUser
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IncidentReport);

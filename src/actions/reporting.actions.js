@@ -36,7 +36,7 @@ export const loadCategoriesTypeError = error => ({
 });
 
 export const loadCategoriesRequest = () => dispatch => {
-  let requestUrl = apiRequest.sercviceBaseUrl + apiRequest.categories.list;
+  let requestUrl = apiRequest.baseUrl + apiRequest.categories.list;
   dispatch(loadCategories());
   try {
     return fetch(requestUrl)
@@ -48,8 +48,7 @@ export const loadCategoriesRequest = () => dispatch => {
 };
 
 export const loadCategoriesTypeRequest = categoryId => dispatch => {
-  let sourceUrl =
-    apiRequest.sercviceBaseUrl + apiRequest.categories.subCategories.list;
+  let sourceUrl = apiRequest.baseUrl + apiRequest.categories.subCategories.list;
   let requestUrl = getAbsoluteApiUrl(sourceUrl, { categoryId: categoryId });
   dispatch(loadCategoriesTypes());
   try {

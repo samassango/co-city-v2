@@ -30,7 +30,7 @@ import {
   Spinner
 } from "native-base";
 import * as Animatable from "react-native-animatable";
-import * as actions from "../../actions";
+import * as actions from "../../actions/login.actions";
 
 class WelcomeScreen extends React.Component {
   state = {
@@ -43,7 +43,7 @@ class WelcomeScreen extends React.Component {
     this.props.authenticateUser(this.state.username, this.state.password);
   };
   render() {
-    console.log(this.props)
+    console.log(this.props);
     if (!!this.props.login.currentUser) {
       this.props.navigation.navigate("Dashboard");
     }

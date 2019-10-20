@@ -304,22 +304,22 @@ const AuthStack = createStackNavigator(
 );
 
 const AppDrawerNavigator = createDrawerNavigator({
-  Dashboard: {
-    screen: HomeStack,
-    navigationOptions: ({ navigation }) => {
-      return {
-        title: "Dashboard",
-        drawerIcon: (
-          <FontIcon
-            style={{ paddingLeft: 5 }}
-            onPress={() => {}}
-            name="dashboard"
-            size={20}
-          />
-        )
-      };
-    }
-  },
+  // Dashboard: {
+  //   screen: HomeStack,
+  //   navigationOptions: ({ navigation }) => {
+  //     return {
+  //       title: "Dashboard",
+  //       drawerIcon: (
+  //         <FontIcon
+  //           style={{ paddingLeft: 5 }}
+  //           onPress={() => {}}
+  //           name="dashboard"
+  //           size={20}
+  //         />
+  //       )
+  //     };
+  //   }
+  // },
   IncidentReport: {
     screen: IncidentReportStack,
     navigationOptions: ({ navigation }) => {
