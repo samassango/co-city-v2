@@ -4,3 +4,4 @@ export { default as SignupAction } from "./signup.actions";
 export { default as ReportingAction } from "./reporting.actions";
 export { default as NotificationAction } from "./notifications.actions";
 export { default as ProfileAction } from "./profile.actions";
+export { default as NearByAction } from "./nearby.actions";

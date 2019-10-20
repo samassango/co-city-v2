@@ -5,7 +5,8 @@ import {
   Profile,
   PasswordReset,
   Signup,
-  Notifications
+  Notifications,
+  NearByServices
 } from "./src/reducer";
 
 const Reducers = combineReducers({
@@ -14,7 +15,8 @@ const Reducers = combineReducers({
   reporting: Reporting,
   profile: Profile,
   userReset: PasswordReset,
-  notifications: Notifications
+  notifications: Notifications,
+  nearby: NearByServices
 });
 
 export default Reducers;

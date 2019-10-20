@@ -14,6 +14,7 @@ import IncidentReport from "./src/screens/report";
 import IncidentHistory from "./src/screens/history";
 import Profile from "./src/screens/profile";
 import NearBy from "./src/screens/nearby";
+import NearByInfo from "./src/screens/nearbyInfo";
 import IncidentAlert from "./src/screens/alert";
 import About from "./src/screens/about";
 import Contacts from "./src/screens/contacts";
@@ -192,7 +193,8 @@ const IncidentReportStack = createStackNavigator(
 
 const NearByStack = createStackNavigator(
   {
-    NearBy: { screen: NearBy }
+    NearBy: { screen: NearBy },
+    NearByInfo: { screen: NearByInfo }
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
