@@ -52,7 +52,7 @@ const loadLogoutError = err => ({
 // This function is for loging the user out.
 export const logoutUser = accessToken => dispatch => {
   let requestUrl =
-    apiRequest.sercviceBaseUrl +
+    apiRequest.baseUrl +
     apiRequest.authenticate.logout +
     "?access_token=" +
     accessToken;

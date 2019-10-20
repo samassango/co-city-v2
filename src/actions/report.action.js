@@ -17,8 +17,7 @@ export const reportIncidentError = error => ({
 
 export const report = (params, accessToken) => dispatch => {
   dispatch(reportIncidentRequest());
-  let requestUrl =
-    apiRequest.sercviceBaseUrl + apiRequest.incidents.postIncident;
+  let requestUrl = apiRequest.baseUrl + apiRequest.incidents.postIncident;
   let body = JSON.stringify(params);
   return fetch(requestUrl, {
     method: "POST",
@@ -31,8 +30,7 @@ export const report = (params, accessToken) => dispatch => {
     .then(response => response.json())
     .then(responseJson => {
       if (responseJson.hasOwnProperty("refNumber")) {
-        let requestUrl =
-          apiRequest.sercviceBaseUrl + apiRequest.categories.incident;
+        let requestUrl = apiRequest.baseUrl + apiRequest.categories.incident;
         let requestSource = getAbsoluteApiUrl(requestUrl, {
           categoryId: responseJson.category
         });

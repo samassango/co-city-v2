@@ -4,7 +4,8 @@ import {
   Reporting,
   Profile,
   PasswordReset,
-  Signup
+  Signup,
+  Notifications
 } from "./src/reducer";
 
 const Reducers = combineReducers({
@@ -12,7 +13,8 @@ const Reducers = combineReducers({
   signup: Signup,
   reporting: Reporting,
   profile: Profile,
-  userReset: PasswordReset
+  userReset: PasswordReset,
+  notifications: Notifications
 });
 
 export default Reducers;

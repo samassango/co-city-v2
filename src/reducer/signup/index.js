@@ -4,7 +4,8 @@ const initialState = {
   isLoading: false,
   isLoaded: false,
   error: null,
-  user: null
+  user: null,
+  suburbs: null
 };
 
 const Signup = (state = initialState, { type, payload } = actions) => {
@@ -24,6 +25,23 @@ const Signup = (state = initialState, { type, payload } = actions) => {
       };
 
     case constants.LOAD_SIGNUP_FAIL:
+      return { ...state, isLoading: false, error: payload };
+
+    case constants.LOAD_LIST_OF_PLACES_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+
+    case constants.LOAD_LIST_OF_PLACES_REQUEST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        suburbs: payload,
+        isLoaded: true
+      };
+
+    case constants.LOAD_LIST_OF_PLACES_REQUEST_ERROR:
       return { ...state, isLoading: false, error: payload };
 
     default:

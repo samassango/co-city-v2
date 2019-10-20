@@ -7,18 +7,30 @@
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/new-icon/ethekwini_logo.png",
+    "primaryColor": "#cccccc",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/new-icon/launch_screen.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "loading": {
+      "hideExponentText": true,
+      "icon": "./assets/loading.png",
+      "backgroundImage": "./assets/new-icon/launch_screen.png"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "za.co.pulego.cocity",
       "supportsTablet": true
+    },
+    "androidStatusBarColor": "#018c6f",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#018c6f"
     },
     "android": {
       "package": "za.co.pulego.cocity",

@@ -17,42 +17,42 @@ export default class IncidentReport extends React.Component {
           datecaptured: "2017-07-15T10:25:40.647Z",
           description: "Contact Crime",
           name: "Contact Crime",
-          categoryIcon: require("../../../assets/NewsIcons/Icons_0018_Fight_Icon.png")
+          categoryIcon: require("../../../assets/new-icon/icons/contact_crime.png")
         },
         {
           categoryId: "5969edbcb517db0011008be2",
           datecaptured: "2017-07-15T10:26:04.498Z",
           description: "Drugs / Guns",
           name: "Drugs / Guns",
-          categoryIcon: require("../../../assets/NewsIcons/Icons_0011_Gun_Icon.png")
+          categoryIcon: require("../../../assets/new-icon/icons/drugs_guns.png")
         },
         {
           categoryId: "5969edd4b517db0011008be3",
           datecaptured: "2017-07-15T10:26:28.237Z",
           description: "Corruption",
           name: "Corruption",
-          categoryIcon: require("../../../assets/NewsIcons/Icons_0017_Bribe_Icon.png")
+          categoryIcon: require("../../../assets/new-icon/icons/corruption.png")
         },
         {
           categoryId: "5969ede9b517db0011008be4",
           datecaptured: "2017-07-15T10:26:49.513Z",
           description: "Property Crime",
           name: "Property Crime",
-          categoryIcon: require("../../../assets/NewsIcons/Icons_0016_Building_Icon.png")
+          categoryIcon: require("../../../assets/new-icon/icons/property-crime.png")
         },
         {
           categoryId: "5969ef20b517db0011008be5",
           datecaptured: "2017-07-15T10:32:00.847Z",
           description: "Bylaw Infringement",
           name: "Bylaw Infringement",
-          categoryIcon: require("../../../assets/NewsIcons/Icons_0012_By_Law_Infrigement_Icon.png")
+          categoryIcon: require("../../../assets/new-icon/icons/by_law_infringement.png")
         },
         {
           categoryId: "5969ef30b517db0011008be6",
           datecaptured: "2017-07-15T10:32:16.019Z",
           description: "Protest Action",
           name: "Protest Action",
-          categoryIcon: require("../../../assets/NewsIcons/Icons_0014_Protest_Icon.png")
+          categoryIcon: require("../../../assets/new-icon/icons/protest_action.png")
         },
         {
           categoryId: "59dded3cb466770012a44b83",
@@ -60,14 +60,14 @@ export default class IncidentReport extends React.Component {
           datecaptured: "2017-10-10T09:18:52.439Z",
           description: "string",
           name: "Vehicle Crime",
-          categoryIcon: require("../../../assets/NewsIcons/Icons_0015_Break_In_Icon.png")
+          categoryIcon: require("../../../assets/new-icon/icons/vehicle_crime.png")
         },
         {
           categoryId: "596f1f41caa81e0011bf3a9e",
           datecaptured: "2017-07-19T08:58:41.054Z",
           description: "Traffic and Road",
           name: "Traffic and Road",
-          categoryIcon: require("../../../assets/NewsIcons/Icons_0013_Traffic_Icon.png")
+          categoryIcon: require("../../../assets/new-icon/icons/road_and_traffic.png")
         }
       ],
       lstCategories: []
@@ -75,9 +75,6 @@ export default class IncidentReport extends React.Component {
   }
   render() {
     return (
-      // <View style={styles.container}>
-      //   <Text>report</Text>
-      // </View>
       <Container>
         <Content
           bounces={true}
@@ -91,11 +88,15 @@ export default class IncidentReport extends React.Component {
                 <Col key={this.state.data[0].categoryId}>
                   <TouchableOpacity
                     key={this.state.data[0].categoryId}
-                    onPress={() => {}}
+                    onPress={() =>
+                      this.props.navigation.navigate("Reporting", {
+                        params: this.state.data[0]
+                      })
+                    }
                   >
                     <ImageBackground
                       key={this.state.data[0].categoryId}
-                      source={require("../../../assets/NewsIcons/Icons_0018_Fight_Icon.png")}
+                      source={require("../../../assets/new-icon/icons/contact_crime.png")}
                       style={styles.channelImg}
                     >
                       <Text
@@ -111,11 +112,15 @@ export default class IncidentReport extends React.Component {
                 <Col key={this.state.data[1].categoryId}>
                   <TouchableOpacity
                     key={this.state.data[1].categoryId}
-                    onPress={() => {}}
+                    onPress={() =>
+                      this.props.navigation.navigate("Reporting", {
+                        params: this.state.data[1]
+                      })
+                    }
                   >
                     <ImageBackground
                       key={this.state.data[1].categoryId}
-                      source={require("../../../assets/NewsIcons/Icons_0011_Gun_Icon.png")}
+                      source={require("../../../assets/new-icon/icons/drugs_guns.png")}
                       style={styles.channelImg}
                     >
                       <Text
@@ -133,7 +138,11 @@ export default class IncidentReport extends React.Component {
                 <Col key={this.state.data[2].categoryId}>
                   <TouchableOpacity
                     key={this.state.data[2].categoryId}
-                    onPress={() => {}}
+                    onPress={() =>
+                      this.props.navigation.navigate("Reporting", {
+                        params: this.state.data[2]
+                      })
+                    }
                   >
                     <ImageBackground
                       key={this.state.data[2].categoryId}
@@ -153,7 +162,11 @@ export default class IncidentReport extends React.Component {
                 <Col key={this.state.data[3].categoryId}>
                   <TouchableOpacity
                     key={this.state.data[3].categoryId}
-                    onPress={() => {}}
+                    onPress={() =>
+                      this.props.navigation.navigate("Reporting", {
+                        params: this.state.data[3]
+                      })
+                    }
                   >
                     <ImageBackground
                       key={this.state.data[3].categoryId}
@@ -175,7 +188,11 @@ export default class IncidentReport extends React.Component {
                 <Col key={this.state.data[4].categoryId}>
                   <TouchableOpacity
                     key={this.state.data[4].categoryId}
-                    onPress={() => {}}
+                    onPress={() =>
+                      this.props.navigation.navigate("Reporting", {
+                        params: this.state.data[4]
+                      })
+                    }
                   >
                     <ImageBackground
                       key={this.state.data[4].categoryId}
@@ -195,7 +212,11 @@ export default class IncidentReport extends React.Component {
                 <Col key={this.state.data[5].categoryId}>
                   <TouchableOpacity
                     key={this.state.data[5].categoryId}
-                    onPress={() => {}}
+                    onPress={() =>
+                      this.props.navigation.navigate("Reporting", {
+                        params: this.state.data[5]
+                      })
+                    }
                   >
                     <ImageBackground
                       key={this.state.data[5].categoryId}
@@ -217,7 +238,11 @@ export default class IncidentReport extends React.Component {
                 <Col key={this.state.data[6].categoryId}>
                   <TouchableOpacity
                     key={this.state.data[6].categoryId}
-                    onPress={() => {}}
+                    onPress={() =>
+                      this.props.navigation.navigate("Reporting", {
+                        params: this.state.data[6]
+                      })
+                    }
                   >
                     <ImageBackground
                       key={this.state.data[6].categoryId}
@@ -237,7 +262,11 @@ export default class IncidentReport extends React.Component {
                 <Col key={this.state.data[7].categoryId}>
                   <TouchableOpacity
                     key={this.state.data[7].categoryId}
-                    onPress={() => {}}
+                    onPress={() =>
+                      this.props.navigation.navigate("Reporting", {
+                        params: this.state.data[7]
+                      })
+                    }
                   >
                     <ImageBackground
                       key={this.state.data[7].categoryId}
@@ -262,11 +291,3 @@ export default class IncidentReport extends React.Component {
     );
   }
 }
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center"
-//   }
-// });

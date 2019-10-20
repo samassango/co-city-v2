@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 import styles from "./styles";
-const bg = require("../../../assets/BG_2.png");
-const logo = require("../../../assets/ts-logo.png");
+const bg = require("../../../assets/new-icon/background_image.png");
+const logo = require("../../../assets/new-icon/ethekwini_logo.png");
 import {
   Image,
   Platform,
@@ -43,7 +43,7 @@ class WelcomeScreen extends React.Component {
     this.props.authenticateUser(this.state.username, this.state.password);
   };
   render() {
-    console.log("state", this.props);
+    console.log(this.props)
     if (!!this.props.login.currentUser) {
       this.props.navigation.navigate("Dashboard");
     }

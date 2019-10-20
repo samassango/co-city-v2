@@ -5,6 +5,8 @@ import {
   createDrawerNavigator,
   createStackNavigator
 } from "react-navigation";
+import { NavigationActions } from "react-navigation";
+
 import Home from "./src/screens/home";
 import WelcomeScreen from "./src/screens/welcome";
 import SignUp from "./src/screens/signup";
@@ -16,6 +18,7 @@ import NearBy from "./src/screens/nearby";
 import IncidentAlert from "./src/screens/alert";
 import About from "./src/screens/about";
 import Contacts from "./src/screens/contacts";
+import ReportingIncident from "./src/screens/reporting";
 
 import Icon from "@expo/vector-icons/Ionicons";
 import FontIcon from "@expo/vector-icons/FontAwesome";
@@ -24,7 +27,8 @@ import EntypoIcon from "@expo/vector-icons/Entypo";
 
 const HomeStack = createStackNavigator(
   {
-    Dashboard: { screen: Home }
+    Dashboard: { screen: Home },
+    Reporting: { screen: ReportingIncident }
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
@@ -38,6 +42,18 @@ const HomeStack = createStackNavigator(
             style={{ paddingLeft: 10 }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
+            size={30}
+          />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 10 }}
+            onPress={() =>
+              navigation.dispatch(
+                NavigationActions.navigate({ routeName: "Welcome" })
+              )
+            }
+            name="md-log-out"
             size={30}
           />
         )
@@ -64,6 +80,14 @@ const AlertStack = createStackNavigator(
             name="md-menu"
             size={30}
           />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 10 }}
+            onPress={() => navigation.navigate("Welcome")}
+            name="md-log-out"
+            size={30}
+          />
         )
       };
     }
@@ -86,6 +110,14 @@ const ContactStack = createStackNavigator(
             style={{ paddingLeft: 10 }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
+            size={30}
+          />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 10 }}
+            onPress={() => navigation.navigate("Welcome")}
+            name="md-log-out"
             size={30}
           />
         )
@@ -112,6 +144,14 @@ const AboutStack = createStackNavigator(
             name="md-menu"
             size={30}
           />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 10 }}
+            onPress={() => navigation.navigate("Welcome")}
+            name="md-log-out"
+            size={30}
+          />
         )
       };
     }
@@ -120,7 +160,8 @@ const AboutStack = createStackNavigator(
 
 const IncidentReportStack = createStackNavigator(
   {
-    IncidentReport: { screen: IncidentReport }
+    IncidentReport: { screen: IncidentReport },
+    Reporting: { screen: ReportingIncident }
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
@@ -134,6 +175,14 @@ const IncidentReportStack = createStackNavigator(
             style={{ paddingLeft: 10 }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
+            size={30}
+          />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 10 }}
+            onPress={() => navigation.navigate("Welcome")}
+            name="md-log-out"
             size={30}
           />
         )
@@ -160,6 +209,14 @@ const NearByStack = createStackNavigator(
             name="md-menu"
             size={30}
           />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 10 }}
+            onPress={() => navigation.navigate("Welcome")}
+            name="md-log-out"
+            size={30}
+          />
         )
       };
     }
@@ -182,6 +239,18 @@ const IncidentHistoryStack = createStackNavigator(
             style={{ paddingLeft: 10 }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
+            size={30}
+          />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 10 }}
+            onPress={() =>
+              navigation.dispatch(
+                NavigationActions.navigate({ routeName: "Welcome" })
+              )
+            }
+            name="md-log-out"
             size={30}
           />
         )
@@ -208,6 +277,14 @@ const ProfileStack = createStackNavigator(
             name="md-menu"
             size={30}
           />
+        ),
+        headerRight: (
+          <Icon
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.navigate("Welcome")}
+            name="md-log-out"
+            size={30}
+          />
         )
       };
     }
@@ -216,16 +293,13 @@ const ProfileStack = createStackNavigator(
 
 const AuthStack = createStackNavigator(
   {
-    Login: { screen: WelcomeScreen },
+    Welcome: { screen: WelcomeScreen },
     SignUp: { screen: SignUp }
   },
   {
-    navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      return {
-        headerTitle: routeName
-      };
-    }
+    navigationOptions: ({ navigation }) => ({
+      header: null
+    })
   }
 );
 
