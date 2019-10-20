@@ -29,7 +29,6 @@ class Profile extends React.Component {
   }
   render() {
     let profileImage = null;
-    console.log("profile", this.props);
     const { profile } = this.props.profile;
     if (profile !== null) {
       if ("images" in profile) {

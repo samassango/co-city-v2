@@ -8,9 +8,8 @@ import {
 import { NavigationActions } from "react-navigation";
 
 import Home from "./src/screens/home";
-import WelcomeScreen from "./src/screens/welcome";
+import WelcomeScreen from "./src/screens/login";
 import SignUp from "./src/screens/signup";
-import Login from "./src/screens/login";
 import IncidentReport from "./src/screens/report";
 import IncidentHistory from "./src/screens/history";
 import Profile from "./src/screens/profile";

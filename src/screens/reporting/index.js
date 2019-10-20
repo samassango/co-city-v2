@@ -25,7 +25,8 @@ import {
   Label,
   Card,
   CardItem,
-  Thumbnail
+  Thumbnail,
+  Spinner
 } from "native-base";
 
 import * as Permissions from "expo-permissions";
@@ -36,7 +37,8 @@ import * as ImagePicker from "expo-image-picker";
 const primary = require("../../utils/theme").brandPrimary;
 
 import styles from "./styles";
-import { ReportingAction } from "../../actions";
+import * as reportingAction from "../../actions/reporting.actions";
+import * as reportAction from "../../actions/report.action";
 import * as sqliteHelper from "../../utils/sqliteHelper";
 
 class ReportingIncident extends React.Component {
@@ -72,8 +74,6 @@ class ReportingIncident extends React.Component {
       accessToken: this.props.currentUser.id,
       tshwaneUserId: this.props.currentUser.userId
     });
-    const category = this.props.navigation.getParam("params", null);
-    this.props.selectedCategory(category);
     //creating history table if it doesnt exist
     //createTBLHistory(sqLiteDataSorce);
 
@@ -89,7 +89,7 @@ class ReportingIncident extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigation.getParam("params", null);
+    const category = this.props.navigation.getParam("params", null);
 
     sqliteHelper.createTBLStatusLog(sqliteHelper.sqLiteDataSorce);
 
@@ -114,20 +114,22 @@ class ReportingIncident extends React.Component {
           ? profileObject.mobileno
           : ""
     });
-    const categoryId = this.props.selectedData.categoryId;
+    const categoryId = category.categoryId;
     this.props.loadCategoriesTypeRequest(categoryId);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.categoryTypes !== undefined) {
+    const { categoryTypes } = nextProps;
+
+    if (!!categoryTypes) {
       this.setState({
-        selectedType: nextProps.categoryTypes[0].subCategoryId,
-        subCategoryId: nextProps.categoryTypest[0].subCategoryId,
-        incidentTypes: nextProps.categoryTypes
+        selectedType: categoryTypes[0].subCategoryId,
+        subCategoryId: categoryTypes[0].subCategoryId,
+        incidentTypes: categoryTypes
       });
     }
 
-    if (this.state.strAddress !== null) {
+    if (!!this.state.strAddress) {
       if (this.state.strAddress.length > 3) {
         this._getLocationByAddressAsync();
       }
@@ -273,6 +275,8 @@ class ReportingIncident extends React.Component {
     );
   }
   _postIncidentReport() {
+    const category = this.props.navigation.getParam("params", null);
+
     if (this.state.latitude === "" && this.state.longitude === "")
       if (Platform.OS === "android" && !Constants.isDevice) {
         this.setState({
@@ -292,7 +296,7 @@ class ReportingIncident extends React.Component {
       let params = {
         region: "599d61b07ceaa900113bbaa8",
         channel: "5981c1bada29000011ee94bc",
-        category: this.props.selectedData.categoryId,
+        category: category.categoryId,
         subCategory: this.state.selectedType,
         description:
           this.state.description !== null && this.state.description !== ""
@@ -532,15 +536,19 @@ class ReportingIncident extends React.Component {
                       primary
                       onPress={this._postIncidentReport.bind(this)}
                     >
-                      <Text
-                        style={
-                          Platform.OS === "android"
-                            ? { fontSize: 14, textAlign: "center" }
-                            : { fontSize: 16, fontWeight: "900" }
-                        }
-                      >
-                        Report
-                      </Text>
+                      {this.props.isLoading ? (
+                        <Spinner color="white" />
+                      ) : (
+                        <Text
+                          style={
+                            Platform.OS === "android"
+                              ? { fontSize: 14, textAlign: "center" }
+                              : { fontSize: 16, fontWeight: "900" }
+                          }
+                        >
+                          Report
+                        </Text>
+                      )}
                     </Button>
                   </View>
                 </CardItem>
@@ -555,23 +563,20 @@ class ReportingIncident extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   loadCategoriesTypeRequest: categoryId =>
-    dispatch(ReportingAction.loadCategoriesTypeRequest(categoryId)),
+    dispatch(reportingAction.loadCategoriesTypeRequest(categoryId)),
   reportIncidents: (incidentsObject, accessToken) =>
-    dispatch(ReportingAction.reportIncidents(incidentsObject, accessToken)),
+    dispatch(reportAction.reportIncidents(incidentsObject, accessToken)),
   loadPostCaseHistoryRequest: (params, accessToken) =>
-    dispatch(ReportingAction.loadPostCaseHistoryRequest(params, accessToken)),
-  selectedCategory: params => dispatch(ReportingAction.selectedCategory(params))
+    dispatch(reportingAction.loadPostCaseHistoryRequest(params, accessToken))
 });
 const mapStateToProps = state => ({
-  profile: state.profile.profile,
+  profile: state.profile,
   currentUser: state.login.currentUser,
   isLoading: state.reporting.isLoading,
-  isLoaded: state.reporting.isLoaded,
   error: state.reporting.error,
   report: state.reporting.report,
   categories: state.reporting.categories,
-  categoryTypes: state.reporting.categoryTypes,
-  selectedData: state.reporting.selectedData
+  categoryTypes: state.reporting.categoryTypes
 });
 
 export default connect(

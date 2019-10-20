@@ -1,5 +1,6 @@
 import * as constants from "../constants";
 import { saveData } from "../utils";
+import { apiRequest } from "../utils/api";
 
 export const reportIncidentRequest = () => ({
   type: constants.LOAD_REPORTING_REQUEST
@@ -15,7 +16,7 @@ export const reportIncidentError = error => ({
   payload: error
 });
 
-export const report = (params, accessToken) => dispatch => {
+export const reportIncidents = (params, accessToken) => dispatch => {
   dispatch(reportIncidentRequest());
   let requestUrl = apiRequest.baseUrl + apiRequest.incidents.postIncident;
   let body = JSON.stringify(params);

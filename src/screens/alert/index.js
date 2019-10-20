@@ -14,7 +14,7 @@ import {
 import { Image, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
-import { NotificationAction } from "../../actions";
+import * as notificationActions from "../../actions/notifications.actions";
 import { sortObjectArrayDesc } from "../../utils/utilsHelper";
 import styles from "./styles";
 class IncidentAlert extends React.Component {
@@ -89,10 +89,7 @@ class IncidentAlert extends React.Component {
     return (
       <Container>
         <Content showsVerticalScrollIndicator={false}>
-          {!!this.props.notifications && this.props.notifications.isLoading && (
-            <Spinner />
-          )}
-          <List>{rowListItems}</List>
+          {this.props.isLoading ? <Spinner /> : <List>{rowListItems}</List>}
         </Content>
       </Container>
     );
@@ -101,14 +98,15 @@ class IncidentAlert extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   loadNotificationsRequest: accessToken =>
-    dispatch(NotificationAction.loadNotificationsRequest(accessToken)),
+    dispatch(notificationActions.loadNotificationsRequest(accessToken)),
   expoPushNotification: (title, message, username) =>
-    dispatch(NotificationAction.expoPushNotification(title, message, username))
+    dispatch(notificationActions.expoPushNotification(title, message, username))
 });
 
 const mapStateToProps = state => ({
   currentUser: state.login.currentUser,
   notifications: state.notifications.notifications,
+  isLoading: state.notifications.isLoading,
   profile: state.profile.profile
 });
 

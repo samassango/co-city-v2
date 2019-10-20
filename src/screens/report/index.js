@@ -76,10 +76,12 @@ class IncidentReport extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.loadProfileRequest(
-      this.props.currentUser.id,
-      this.props.currentUser.userId
-    );
+    if (this.props.profile === null) {
+      this.props.loadProfileRequest(
+        this.props.currentUser.id,
+        this.props.currentUser.userId
+      );
+    }
   }
 
   render() {
