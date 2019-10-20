@@ -267,12 +267,19 @@ class ReportingIncident extends React.Component {
       historiesArray: [],
       tshwaneUserId: null
     });
-    Alert.alert(
-      "Successfully reported",
-      "Thank you for Reporting.\nPlease Check report progress in case history.",
-      [{ text: "OK", onPress: () => Actions.channels() }],
-      { cancelable: false }
-    );
+    if (!!this.props.report) {
+      Alert.alert(
+        "Successfully reported",
+        "Thank you for Reporting.\nPlease Check report progress in case history.",
+        [
+          {
+            text: "OK",
+            onPress: () => this.props.navigation.navigate("IncidentReport")
+          }
+        ],
+        { cancelable: false }
+      );
+    }
   }
   _postIncidentReport() {
     const category = this.props.navigation.getParam("params", null);
@@ -328,7 +335,12 @@ class ReportingIncident extends React.Component {
       Alert.alert(
         "Connection: Error",
         "Please check your internet connection",
-        [{ text: "OK", onPress: () => Actions.channels() }],
+        [
+          {
+            text: "OK",
+            onPress: () => this.props.navigation.navigate("IncidentReport")
+          }
+        ],
         { cancelable: false }
       );
     }

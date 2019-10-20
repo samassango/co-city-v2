@@ -29,19 +29,59 @@ import {
   Toast,
   Spinner
 } from "native-base";
+import Expo, { Notifications } from "expo";
 import * as Animatable from "react-native-animatable";
+
 import * as actions from "../../actions/login.actions";
+import {
+  createTBLLogin,
+  createTBLHistory,
+  createTBLStatusLog,
+  _deviceInfo,
+  _getDeviceInfo,
+  sqLiteDataSorce
+} from "../../utils/sqliteHelper";
+
+import { registerForPushNotificationsAsync } from "../../utils/notificationConfig";
 
 class LoginScreen extends React.Component {
   state = {
     username: "",
     password: ""
   };
-  componentDidMount() {}
+  componentWillMount() {
+    createTBLLogin(sqLiteDataSorce);
+    createTBLHistory(sqLiteDataSorce);
+    createTBLStatusLog(sqLiteDataSorce);
+    registerForPushNotificationsAsync(null, null);
+
+    this._notificationSubscription = Notifications.addListener(
+      this._handleNotification
+    );
+  }
+
   loginHandler = () => {
-    console.log(this.state);
     this.props.authenticateUser(this.state.username, this.state.password);
   };
+
+  componentWillUnmount() {
+    this._notificationSubscription.remove();
+  }
+
+  _handleNotification = notification => {
+    if (notification.origin === "selected") {
+      if (notification.data.type === "casehistory") {
+        this.props.navigation.navigate("IncidentAlert", {
+          notificationObject: notification
+        });
+      } else {
+        this.props.navigation.navigate("IncidentReport", {
+          notificationObject: notification
+        });
+      }
+    }
+  };
+
   render() {
     console.log(this.props);
     if (!!this.props.login.currentUser) {
