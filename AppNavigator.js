@@ -48,11 +48,12 @@ const HomeStack = createStackNavigator(
         headerRight: (
           <Icon
             style={{ paddingRight: 10 }}
-            onPress={() =>
+            onPress={() => {
+              AsyncStorage.clear();
               navigation.dispatch(
                 NavigationActions.navigate({ routeName: "Welcome" })
-              )
-            }
+              );
+            }}
             name="md-log-out"
             size={30}
           />
@@ -181,7 +182,10 @@ const IncidentReportStack = createStackNavigator(
         headerRight: (
           <Icon
             style={{ paddingRight: 10 }}
-            onPress={() => navigation.navigate("Welcome")}
+            onPress={() => {
+              AsyncStorage.clear();
+              navigation.navigate("Welcome");
+            }}
             name="md-log-out"
             size={30}
           />

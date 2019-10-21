@@ -71,11 +71,11 @@ class LoginScreen extends React.Component {
   _handleNotification = notification => {
     if (notification.origin === "selected") {
       if (notification.data.type === "casehistory") {
-        this.props.navigation.navigate("IncidentAlert", {
+        this.props.navigation.navigate("IncidentHistory", {
           notificationObject: notification
         });
       } else {
-        this.props.navigation.navigate("IncidentReport", {
+        this.props.navigation.navigate("IncidentAlert", {
           notificationObject: notification
         });
       }
