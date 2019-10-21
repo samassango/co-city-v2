@@ -28,6 +28,7 @@ import styles from "./styles";
 
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
+import Constants from "expo-constants";
 import MapView from "react-native-maps";
 
 import {
@@ -96,7 +97,26 @@ class NearBy extends React.Component {
 
   componentWillMount() {
     this._handleLocationPositionAsync();
+
+    if (Platform.OS === "android" && !Constants.isDevice) {
+      this.setState({
+        errorMessage:
+          "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
+      });
+    } else {
+      this._getLocationPermissionAsync();
+    }
   }
+
+  _getLocationPermissionAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      this.setState({
+        errorMessage: "Permission to access location was denied"
+      });
+    }
+  };
+
   _handleLocationPositionAsync = async () => {
     return await Location.watchPositionAsync(
       GEOLOCATION_OPTIONS,
@@ -127,7 +147,14 @@ class NearBy extends React.Component {
         markers: generateMarkerObject(nextProps.googlePlaces)
       });
   }
-
+  getPermissionAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      this.setState({
+        errorMessage: "Permission to access location was denied"
+      });
+    }
+  };
   _getGooglePlacesAsync = async () => {
     await this.props.loadGooglePlacesRequest(
       this.state.regionObject.latitude,

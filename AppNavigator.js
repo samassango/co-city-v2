@@ -1,10 +1,7 @@
 import React from "react";
-import {
-  createSwitchNavigator,
-  createAppContainer,
-  createDrawerNavigator,
-  createStackNavigator
-} from "react-navigation";
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { createDrawerNavigator } from "react-navigation-drawer";
 import { NavigationActions } from "react-navigation";
 
 import Home from "./src/screens/home";

@@ -89,6 +89,8 @@ class ReportingIncident extends React.Component {
   }
 
   componentDidMount() {
+    this.getPermissionAsync();
+
     const category = this.props.navigation.getParam("params", null);
 
     sqliteHelper.createTBLStatusLog(sqliteHelper.sqLiteDataSorce);
@@ -169,7 +171,14 @@ class ReportingIncident extends React.Component {
       selectedType: value
     });
   }
-
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+      }
+    }
+  };
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -178,7 +187,6 @@ class ReportingIncident extends React.Component {
       base64: true,
       exif: true
     });
-    //console.log("result",result);
 
     if (!result.cancelled) {
       let imageFileExtention = result.uri.substr(
