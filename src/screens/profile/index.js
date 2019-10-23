@@ -93,7 +93,9 @@ class Profile extends React.Component {
                   block
                   primary
                   style={styles.buttonOne}
-                  onPress={() => {}}
+                  onPress={() => {
+                    this.props.navigation.navigate("PasswordReset");
+                  }}
                 >
                   <Text style={styles.btnTxt}>Forgot Password?</Text>
                 </Button>
@@ -101,7 +103,9 @@ class Profile extends React.Component {
                   block
                   primary
                   style={styles.butttonTwo}
-                  onPress={() => {}}
+                  onPress={() => {
+                    this.props.navigation.navigate("EditProfile");
+                  }}
                 >
                   <Text style={styles.btnTxt}>Edit Profile</Text>
                 </Button>

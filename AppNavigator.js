@@ -16,6 +16,8 @@ import IncidentAlert from "./src/screens/alert";
 import About from "./src/screens/about";
 import Contacts from "./src/screens/contacts";
 import ReportingIncident from "./src/screens/reporting";
+import PasswordReset from "./src/screens/passwordReset";
+import EditProfile from "./src/screens/editProfile";
 
 import Icon from "@expo/vector-icons/Ionicons";
 import FontIcon from "@expo/vector-icons/FontAwesome";
@@ -263,7 +265,9 @@ const IncidentHistoryStack = createStackNavigator(
 
 const ProfileStack = createStackNavigator(
   {
-    Profile: { screen: Profile }
+    Profile: { screen: Profile },
+    PasswordReset: { screen: PasswordReset },
+    EditProfile: { screen: EditProfile }
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
