@@ -211,18 +211,18 @@ class ReportingIncident extends React.Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    let jsonLocation = location;
+    // let jsonLocation = location;
     // console.log("jsonLocation11",location);
 
     this.setState({
-      longitude: jsonLocation.coords.longitude,
-      latitude: jsonLocation.coords.latitude,
-      jsonLocation: jsonLocation
+      longitude: location.coords.longitude,
+      latitude: location.coords.latitude,
+      jsonLocation: location
     });
 
     this._reverseGeoLocationAsync({
-      longitude: jsonLocation.coords.longitude,
-      latitude: jsonLocation.coords.latitude
+      longitude: location.coords.longitude,
+      latitude: location.coords.latitude
     });
   };
 
@@ -236,12 +236,12 @@ class ReportingIncident extends React.Component {
 
     let location = await Location.geocodeAsync(this.state.strAddress);
     let jsonLocation = location;
-    console.log("jsonLocationByAddress", location);
+    console.log("location", jsonLocation);
     if (jsonLocation !== undefined) {
       this.setState({
-        longitude: jsonLocation.coords.longitude,
-        latitude: jsonLocation.coords.latitude,
-        jsonLocation
+        longitude: jsonLocation[0].longitude,
+        latitude: jsonLocation[0].latitude,
+        jsonLocation: jsonLocation
       });
     }
   };
@@ -275,33 +275,9 @@ class ReportingIncident extends React.Component {
       historiesArray: [],
       tshwaneUserId: null
     });
-    if (!!this.props.report) {
-      Alert.alert(
-        "Successfully reported",
-        "Thank you for Reporting.\nPlease Check report progress in case history.",
-        [
-          {
-            text: "OK",
-            onPress: () => this.props.navigation.navigate("IncidentReport")
-          }
-        ],
-        { cancelable: false }
-      );
-    }
   }
   _postIncidentReport() {
     const category = this.props.navigation.getParam("params", null);
-
-    if (this.state.latitude === "" && this.state.longitude === "")
-      if (Platform.OS === "android" && !Constants.isDevice) {
-        this.setState({
-          errorMessage:
-            "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
-        });
-      } else {
-        console.log("Yoh yoh yoh I can see the data");
-        this._getLocationAsync();
-      }
 
     this.setState({ isReportIncidents: true, successReport: true });
     let profileObject = this.props.profile.profile;
@@ -337,7 +313,7 @@ class ReportingIncident extends React.Component {
       if (this._validateInputsFields()) {
         console.log("params", params);
         this.props.reportIncidents(params, accessToken);
-        return this._clearInputsForm();
+        // return this._clearInputsForm();
       }
     } else {
       Alert.alert(
@@ -383,9 +359,7 @@ class ReportingIncident extends React.Component {
     return _isValidInputs;
   }
   _onChangeLocationState() {
-    // this._getLocationAsync();
     let isChecked = this.state.locationState ? false : true;
-    console.log("is check againS", isChecked);
     this.setState({ locationState: isChecked });
   }
   _onChangeAnonymousState() {
@@ -404,31 +378,31 @@ class ReportingIncident extends React.Component {
         incidentsId: results.id
       };
 
-      console.log("currentHistories", currentHistories);
       if (currentHistories !== null && currentHistories !== undefined) {
         let histories = currentHistories;
 
         histories.concat(params);
-        console.log("histories>>>>", histories);
         this.setState({ historiesArray: histories });
       } else {
         let histories = [];
         histories.push(params);
-        console.log("histories", histories);
         this.setState({ historiesArray: histories });
       }
     });
     await AsyncStorage.removeItem("HISTORIES_KEY");
     let historyArray = this.state.historiesArray;
-    console.log("historyArray>>>>>>", historyArray);
     AsyncStorage.setItem("HISTORIES_KEY", JSON.stringify(historyArray));
   }
+
+  report = () => {
+    console.log("reporting");
+  };
 
   render() {
     let { image } = this.state;
 
     let category = this.props.navigation.getParam("params", null);
-    console.log(category);
+
     let selectedTypesList = this.state.incidentTypes;
 
     let typeRows = selectedTypesList.map(row => renderTypesRows(row));
@@ -439,6 +413,23 @@ class ReportingIncident extends React.Component {
           key={row.subCategoryId}
           value={row.subCategoryId}
         />
+      );
+    }
+
+    if (!!this.props.report) {
+      Alert.alert(
+        "Successfully reported",
+        "Thank you for Reporting.\nPlease Check report progress in case history.",
+        [
+          {
+            text: "OK",
+            onPress: () => {
+              this.props.clearReportedIncident();
+              this.props.navigation.navigate("IncidentReport");
+            }
+          }
+        ],
+        { cancelable: false }
       );
     }
 
@@ -545,7 +536,7 @@ class ReportingIncident extends React.Component {
                         </Label>
                       </Item>
                     ) : (
-                      <Text style={{ color: "#000000" }}></Text>
+                      <Text style={{ color: "#000000" }}>{""}</Text>
                     )}
                   </View>
                 </CardItem>
@@ -587,7 +578,8 @@ const mapDispatchToProps = dispatch => ({
   reportIncidents: (incidentsObject, accessToken) =>
     dispatch(reportAction.reportIncidents(incidentsObject, accessToken)),
   loadPostCaseHistoryRequest: (params, accessToken) =>
-    dispatch(reportingAction.loadPostCaseHistoryRequest(params, accessToken))
+    dispatch(reportingAction.loadPostCaseHistoryRequest(params, accessToken)),
+  clearReportedIncident: () => dispatch(reportAction.clearReportedIncident())
 });
 const mapStateToProps = state => ({
   profile: state.profile,

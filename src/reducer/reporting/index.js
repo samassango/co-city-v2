@@ -66,6 +66,9 @@ const Reporting = (state = initialState, { type, payload } = actions) => {
     case constants.LOAD_SELECTED_CATEGORY:
       return { ...state, selectedData: payload };
 
+    case constants.LOAD_REPORTING_CLEAR:
+      return { ...state, isLoaded: false, isLoading: false, report: null };
+
     default:
       return state;
   }

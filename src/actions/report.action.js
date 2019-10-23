@@ -24,6 +24,8 @@ export const reportIncidentError = error => ({
   payload: error
 });
 
+export const clearReportedIncident =()=>({type: constants.LOAD_REPORTING_CLEAR})
+
 export const reportIncidents = (params, accessToken) => dispatch => {
   console.log(accessToken);
   dispatch(reportIncidentRequest());
@@ -68,7 +70,6 @@ export const reportIncidents = (params, accessToken) => dispatch => {
                 incidentId: responseJson.id,
                 categoryName: response.name
               };
-              // saveData("history", params);
               storeCaseHistory(params, sqLiteDataSorce);
 
               dispatch(reportIncidentSuccess(responseJson));
