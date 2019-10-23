@@ -18,6 +18,7 @@ import Contacts from "./src/screens/contacts";
 import ReportingIncident from "./src/screens/reporting";
 import PasswordReset from "./src/screens/passwordReset";
 import EditProfile from "./src/screens/editProfile";
+import AlertView from "./src/screens/alertView";
 
 import Icon from "@expo/vector-icons/Ionicons";
 import FontIcon from "@expo/vector-icons/FontAwesome";
@@ -64,7 +65,8 @@ const HomeStack = createStackNavigator(
 
 const AlertStack = createStackNavigator(
   {
-    Dashboard: { screen: IncidentAlert }
+    Dashboard: { screen: IncidentAlert },
+    AlertView: { screen: AlertView }
   },
   {
     defaultNavigationOptions: ({ navigation }) => {

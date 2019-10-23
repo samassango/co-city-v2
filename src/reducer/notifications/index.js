@@ -31,7 +31,7 @@ const Notifications = (state = initialState, { type, payload } = actions) => {
     case constants.LOAD_NOTIFICATIONS_DETAIL_REQUEST_STARTED:
       return { ...state, isLoading: true };
 
-    case constants.AD_NOTIFICATIONS_DETAIL_REQUEST_SUCCESS:
+    case constants.LOAD_NOTIFICATIONS_DETAIL_REQUEST_SUCCESS:
       return {
         ...state,
         isLoading: false,

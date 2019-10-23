@@ -46,7 +46,14 @@ class IncidentAlert extends React.Component {
       const renderRowItem = rowItem => {
         return (
           <ListItem key={rowItem.id} avatar>
-            <TouchableOpacity style={styles.touch} onPress={() => {}}>
+            <TouchableOpacity
+              style={styles.touch}
+              onPress={() => {
+                this.props.navigation.navigate("AlertView", {
+                  params: { notificationData: rowItem }
+                });
+              }}
+            >
               <Card style={styles.card}>
                 <CardItem>
                   <Left>
@@ -85,7 +92,6 @@ class IncidentAlert extends React.Component {
       rowListItems = newNotific.map(rowItem => renderRowItem(rowItem));
     }
 
-    console.log("notifications", this.props);
     return (
       <Container>
         <Content showsVerticalScrollIndicator={false}>
