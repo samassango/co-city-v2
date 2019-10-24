@@ -3,6 +3,11 @@ import * as constants from "../../constants";
 const initialState = {
   isLoading: false,
   isLoaded: false,
+  histories: null,
+  historyObject: null,
+  incidentObject: null,
+  categoryObject: null,
+  responseSubCat: null,
   error: null
 };
 
@@ -13,7 +18,7 @@ const History = (state = initialState, { type, payload } = actions) => {
     case constants.LOAD_CASE_HISTORY_REQUEST_SUCCESS:
       return {
         ...state,
-        histories: payload.responseJson,
+        histories: payload,
         isLoadingHistory: false
       };
     case constants.LOAD_CASE_HISTORY_REQUEST_ERROR:
@@ -24,7 +29,7 @@ const History = (state = initialState, { type, payload } = actions) => {
       return {
         ...state,
         isLoading: false,
-        historyObject: payload.responseJson
+        historyObject: payload
       };
     case constants.LOAD_POST_CASE_HISTORY_REQUEST_ERROR:
       return {
@@ -48,6 +53,8 @@ const History = (state = initialState, { type, payload } = actions) => {
         isLoadingIncident: false,
         errorGetHistory: payload.error
       };
+    default:
+      return state;
   }
 };
 export default History;

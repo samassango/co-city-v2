@@ -65,8 +65,8 @@ class AlertView extends React.Component {
     this.setState({ open: false });
   }
   render() {
-    let detailObject = this.props.notifications.notificationData;
-    console.log("detailObject>>", detailObject);
+    let detailObject = this.props.notifications.notificationData[0];
+    // console.log("detailObject>>", detailObject);
     return (
       <Container>
         <ImageBackground

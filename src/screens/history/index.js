@@ -132,74 +132,74 @@ class IncidentHistory extends React.Component {
     const _thisContext = this;
 
     console.log("historiesArray", this.state.historiesArray);
+    console.log("this.props", this.props);
 
     let rowListItems = [];
-    if (this.state.historiesArray !== undefined) {
-      if (
-        this.state.historiesArray.length > 0 &&
-        this.state.historiesArray[0] !== undefined
-      ) {
-        let historiesItems = this.state.historiesArray;
+    if (!!this.state.historiesArray && this.state.historiesArray.length > 0) {
+      let historiesItems = this.state.historiesArray;
 
-        rowListItems = historiesItems.map(rowItem => renderRowItem(rowItem));
+      function renderRowItem(rowItem) {
+        let categoryIcon = _thisContext.state.categories[0].categoryIcon; // temporary value.
 
-        function renderRowItem(rowItem) {
-          let categoryIcon = _thisContext.state.categories[0].categoryIcon; // temporary value.
+        let categoryIndex = _thisContext.state.categories.findIndex(
+          item => item.name == rowItem.categoryName
+        );
 
-          let categoryIndex = _thisContext.state.categories.findIndex(
-            item => item.name == rowItem.categoryName
-          );
-
-          if (categoryIndex >= 0) {
-            categoryIcon =
-              _thisContext.state.categories[categoryIndex].categoryIcon;
-          }
-          return (
-            <ListItem key={rowItem.id} avatar>
-              <TouchableOpacity
-                style={{ flexDirection: "row" }}
-                onPress={() =>
-                  this.props.navigation.navigate("ViewHistory", {
-                    params: {
-                      historyId: rowItem.id,
-                      caseHistoryObject: rowItem
-                    }
-                  })
-                }
-              >
-                <Card style={styles.card}>
-                  <CardItem>
-                    <Left>
-                      <Thumbnail source={categoryIcon} />
-                      <Body>
-                        <Text>Ref: {rowItem.refNumber}</Text>
-                        <Text note>
-                          Reported:{" "}
-                          {new Date(rowItem.datecaptured).toDateString()}
-                        </Text>
-                      </Body>
-                    </Left>
-                  </CardItem>
-                  <CardItem>
-                    <Body>
-                      <Text>{rowItem.notes}</Text>
-                    </Body>
-                  </CardItem>
-                  <CardItem>
-                    <Left>
-                      <Button transparent primary>
-                        <Icon name="ios-pricetag" style={{ marginRight: 7 }} />
-                        <Text>{rowItem.status}</Text>
-                      </Button>
-                    </Left>
-                  </CardItem>
-                </Card>
-              </TouchableOpacity>
-            </ListItem>
-          );
+        if (categoryIndex >= 0) {
+          categoryIcon =
+            _thisContext.state.categories[categoryIndex].categoryIcon;
         }
+        return (
+          <ListItem key={rowItem.id} avatar>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+              onPress={() => {
+                _thisContext.props.navigation.navigate("ViewHistory", {
+                  params: {
+                    historyId: rowItem.id,
+                    caseHistoryObject: rowItem
+                  }
+                });
+              }}
+            >
+              <Card style={styles.card}>
+                <CardItem>
+                  <Left>
+                    <Thumbnail source={categoryIcon} />
+                    <Body>
+                      <Text>Ref: {rowItem.refNumber}</Text>
+                      <Text note>
+                        Reported:{" "}
+                        {new Date(rowItem.datecaptured).toDateString()}
+                      </Text>
+                    </Body>
+                  </Left>
+                </CardItem>
+                <CardItem>
+                  <Body>
+                    <Text>{rowItem.notes}</Text>
+                  </Body>
+                </CardItem>
+                <CardItem>
+                  <Left>
+                    <Button transparent primary>
+                      <Icon name="ios-pricetag" style={{ marginRight: 7 }} />
+                      <Text>{rowItem.status}</Text>
+                    </Button>
+                  </Left>
+                </CardItem>
+              </Card>
+            </TouchableOpacity>
+          </ListItem>
+        );
       }
+      rowListItems = historiesItems.map(rowItem => renderRowItem(rowItem));
     }
+
     let loadingIndicator =
       this.state.results === "LIST_LOADING" &&
       this.state.historiesArray.length > 0 ? null : (
@@ -243,7 +243,9 @@ class IncidentHistory extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  state: state
+});
 
 const mapDispatchToProps = dispatch => ({});
 

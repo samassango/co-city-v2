@@ -1,6 +1,4 @@
 import React from "react";
-
-import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import {
   Image,
@@ -35,32 +33,41 @@ const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 import { _deleteCaseHistory, sqLiteDataSorce } from "../../utils/sqliteHelper";
 
-export default class ViewHistory extends React.Component {
+class ViewHistory extends React.Component {
   constructor(props) {
     super(props);
+    const { caseHistoryObject } = this.props.navigation.getParam(
+      "params",
+      null
+    );
     this.state = {
-      refNumber: this.props.caseHistoryObject.refNumber,
+      refNumber: caseHistoryObject.refNumber,
       addressObject: null,
       statusLog: null
     };
   }
 
   componentDidMount() {
-    this._getStatusLog(this.props.caseHistoryObject.incidentsId);
+    console.log(this.props.currentUser);
+    const histories = this.props.navigation.getParam("params", null);
     this.props.loadGetCaseHistoryRequest(
-      this.props.caseHistoryObject.incidentsId,
+      histories.caseHistoryObject.incidentsId,
       this.props.currentUser.id
     );
+    this._getStatusLog(histories.caseHistoryObject.incidentsId);
   }
+
   componentDidUpdate() {
+    const histories = this.props.navigation.getParam("params", null);
     if (this.state.statusLog === null) {
-      this._getStatusLog(this.props.caseHistoryObject.incidentsId);
+      this._getStatusLog(histories.incidentsId);
     }
   }
 
   _deleteHistory() {
+    const histories = this.props.navigation.getParam("params", null);
     let db = sqLiteDataSorce;
-    _deleteCaseHistory(db, this.props.caseHistoryObject.id);
+    _deleteCaseHistory(db, histories.id);
     return Actions.timeline();
   }
 
@@ -102,7 +109,8 @@ export default class ViewHistory extends React.Component {
     });
   }
   render() {
-      const histories = this.props.navigation.getParam('params',null)
+    const histories = this.props.navigation.getParam("params", null);
+    console.log("histories", histories);
     let latLng = {
       latitude:
         this.props.histories.incidentObject !== null
@@ -114,7 +122,7 @@ export default class ViewHistory extends React.Component {
           : 0
     };
 
-    let date = new Date(this.props.caseHistoryObject.datecaptured);
+    let date = new Date(histories.datecaptured);
 
     console.log("latlng", latLng);
     console.log("statusLog", this.state.statusLog);
@@ -137,7 +145,7 @@ export default class ViewHistory extends React.Component {
         );
       });
     } else {
-      let logDate = new Date(this.props.caseHistoryObject.datecaptured);
+      let logDate = new Date(histories.datecaptured);
       let time = logDate.getHours() + ":" + logDate.getMinutes();
       statusLogViews = (
         <CardItem style={styles.statusLog}>
@@ -145,9 +153,7 @@ export default class ViewHistory extends React.Component {
             {time + logDate.getHours() > 12 ? " PM" : " AM"}
           </Text>
           <Body style={{ paddingLeft: 25 }}>
-            <Text style={styles.logStatus}>
-              {this.props.caseHistoryObject.status}
-            </Text>
+            <Text style={styles.logStatus}>{histories.status}</Text>
           </Body>
         </CardItem>
       );
@@ -156,33 +162,9 @@ export default class ViewHistory extends React.Component {
     return (
       <Container>
         <ImageBackground
-          source={require("../../../images/glow2.png")}
+          source={require("../../../assets/glow2.png")}
           style={styles.container}
         >
-          <Header style={styles.header} androidStatusBarColor="#018c6f">
-            <Left style={styles.headerLeft}>
-              <Button transparent onPress={() => Actions.timeline()}>
-                <Icon active name="arrow-back" />
-              </Button>
-            </Left>
-            <Body style={styles.headerBody}>
-              <Text style={styles.pageTitle}>Ref: {this.state.refNumber}</Text>
-            </Body>
-            <Right style={styles.headerRight}>
-              <Button
-                transparent
-                onPress={() =>
-                  Actions.comments({
-                    incidentsId: this.props.caseHistoryObject.incidentsId,
-                    statusLog: this.state.statusLog
-                  })
-                }
-              >
-                <Icon name="chatboxes" style={styles.headerIcons} />
-              </Button>
-            </Right>
-          </Header>
-
           <Content showsVerticalScrollIndicator={false}>
             <Card style={styles.card}>
               <CardItem>
@@ -198,12 +180,12 @@ export default class ViewHistory extends React.Component {
                         : "wait..."}
                     </Text>
                     <Text note style={styles.status}>
-                      Status: {this.props.caseHistoryObject.status}
+                      Status: {histories.caseHistoryObject.status}
                     </Text>
                     <Text note style={styles.dateNote}>
                       Date:{" "}
                       {new Date(
-                        this.props.caseHistoryObject.datecaptured
+                        histories.caseHistoryObject.datecaptured
                       ).toUTCString()}
                     </Text>
                   </Body>
@@ -246,7 +228,7 @@ export default class ViewHistory extends React.Component {
 
               <CardItem>
                 <Body>
-                  <Text>{this.props.caseHistoryObject.notes}</Text>
+                  <Text>{histories.caseHistoryObject.notes}</Text>
                 </Body>
               </CardItem>
 
@@ -271,20 +253,19 @@ export default class ViewHistory extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch)=> {
-    return {
-      loadGetCaseHistoryRequest: (incidentId, accessToken) =>
-        dispatch(loadGetCaseHistoryRequest(incidentId, accessToken))
-    };
-  }
-  
-  const mapStateToProps = state => ({
-    currentUser: state.login.currentUser,
-    histories: state.histories
-  });
-  
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ViewHistory);
-  
+const mapDispatchToProps = dispatch => {
+  return {
+    loadGetCaseHistoryRequest: (incidentId, accessToken) =>
+      dispatch(loadGetCaseHistoryRequest(incidentId, accessToken))
+  };
+};
+
+const mapStateToProps = state => ({
+  currentUser: state.login.currentUser,
+  histories: state.histories
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ViewHistory);

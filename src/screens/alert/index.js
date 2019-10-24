@@ -34,7 +34,7 @@ class IncidentAlert extends React.Component {
         this.props.navigation.navigate("Welcome");
       }
     } catch (error) {
-      console.log("Loading Notification Error:", error);
+      // console.log("Loading Notification Error:", error);
     }
   }
 

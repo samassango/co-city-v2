@@ -9,6 +9,7 @@ import WelcomeScreen from "./src/screens/login";
 import SignUp from "./src/screens/signup";
 import IncidentReport from "./src/screens/report";
 import IncidentHistory from "./src/screens/history";
+import ViewHistory from "./src/screens/viewhistory";
 import Profile from "./src/screens/profile";
 import NearBy from "./src/screens/nearby";
 import NearByInfo from "./src/screens/nearbyInfo";
@@ -231,7 +232,8 @@ const NearByStack = createStackNavigator(
 
 const IncidentHistoryStack = createStackNavigator(
   {
-    IncidentHistory: { screen: IncidentHistory }
+    IncidentHistory: { screen: IncidentHistory },
+    ViewHistory: { screen: ViewHistory }
   },
   {
     defaultNavigationOptions: ({ navigation }) => {

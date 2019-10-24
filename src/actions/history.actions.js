@@ -106,7 +106,7 @@ export const loadGetCaseHistoryRequest = (
   incidentId,
   accessToken
 ) => dispatch => {
-  let sourceUrl = apiRequest.sercviceBaseUrl + apiRequest.incidents.getIncident;
+  let sourceUrl = apiRequest.baseUrl + apiRequest.incidents.getIncident;
   let requestUrl =
     getAbsoluteApiUrl(sourceUrl, { id: incidentId }) +
     "?access_token=" +
@@ -125,7 +125,7 @@ export const loadGetCaseHistoryRequest = (
       .then(response => response.json())
       .then(responseJson => {
         console.log("Case Incident", responseJson);
-        let url = apiRequest.sercviceBaseUrl + apiRequest.categories.incident;
+        let url = apiRequest.baseUrl + apiRequest.categories.incident;
         console.log("Urlcat", url);
         let urlIncident =
           getAbsoluteApiUrl(url, { categoryId: responseJson.category }) +
@@ -142,10 +142,9 @@ export const loadGetCaseHistoryRequest = (
             console.log("Case GET Category", responseJson);
 
             let urlSubCategory =
-              getAbsoluteApiUrl(
-                apiRequest.sercviceBaseUrl + apiRequest.subCategory,
-                { subCategoryId: responseJson.subCategory }
-              ) +
+              getAbsoluteApiUrl(apiRequest.baseUrl + apiRequest.subCategory, {
+                subCategoryId: responseJson.subCategory
+              }) +
               "?access_token=" +
               accessToken;
 
