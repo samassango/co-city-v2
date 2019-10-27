@@ -37,6 +37,7 @@ import {
   createTBLLogin,
   createTBLHistory,
   createTBLStatusLog,
+  deleteCaseHistory,
   _deviceInfo,
   _getDeviceInfo,
   sqLiteDataSorce
@@ -53,6 +54,7 @@ class LoginScreen extends React.Component {
     createTBLLogin(sqLiteDataSorce);
     createTBLHistory(sqLiteDataSorce);
     createTBLStatusLog(sqLiteDataSorce);
+    deleteCaseHistory(sqLiteDataSorce);
     registerForPushNotificationsAsync(null, null);
 
     this._notificationSubscription = Notifications.addListener(
@@ -61,7 +63,29 @@ class LoginScreen extends React.Component {
   }
 
   loginHandler = () => {
-    this.props.authenticateUser(this.state.username, this.state.password);
+    if (this.isInputValid()) {
+      this.props.authenticateUser(this.state.username, this.state.password);
+    }
+  };
+
+  isInputValid = () => {
+    if (this.state.username === "") {
+      Alert.alert(
+        "Error: Invalid Username",
+        "Please enter your valid Username.",
+        [{ text: "ok" }]
+      );
+      return;
+    }
+    if (this.state.password === "") {
+      Alert.alert(
+        "Error: Invalid Password",
+        "Please enter your valid password.",
+        [{ text: "ok" }]
+      );
+      return;
+    }
+    return true;
   };
 
   componentWillUnmount() {
@@ -178,7 +202,9 @@ class LoginScreen extends React.Component {
                     <Button
                       transparent
                       style={{ alignSelf: "flex-end" }}
-                      onPress={() => {}}
+                      onPress={() => {
+                        this.props.navigation.navigate("Password");
+                      }}
                     >
                       <Text style={styles.helpBtns}>Forgot Password?</Text>
                     </Button>

@@ -140,7 +140,7 @@ class SignUp extends React.Component {
         >
           <Content>
             <View style={styles.formContainer}>
-              <Text style={styles.signupHeader}>Join Tshwane Safety</Text>
+              <Text style={styles.signupHeader}>Join eThekwini Safety</Text>
 
               <Text style={styles.signupInstruction} note>
                 {
@@ -234,7 +234,9 @@ class SignUp extends React.Component {
               </Button>
             </View>
             <View style={styles.backToLogin}>
-              <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Welcome")}
+              >
                 <Text style={styles.termsText}>Go Back</Text>
               </TouchableOpacity>
             </View>

@@ -3,6 +3,7 @@ import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { NavigationActions } from "react-navigation";
+import { AsyncStorage } from "react-native";
 
 import Home from "./src/screens/home";
 import WelcomeScreen from "./src/screens/login";
@@ -20,6 +21,7 @@ import ReportingIncident from "./src/screens/reporting";
 import PasswordReset from "./src/screens/passwordReset";
 import EditProfile from "./src/screens/editProfile";
 import AlertView from "./src/screens/alertView";
+import Password from "./src/screens/password";
 
 import Icon from "@expo/vector-icons/Ionicons";
 import FontIcon from "@expo/vector-icons/FontAwesome";
@@ -36,11 +38,12 @@ const HomeStack = createStackNavigator(
       return {
         headerTitle: "Dashboard",
         headerStyle: {
-          backgroundColor: "#1fb7a0"
+          backgroundColor: "#256197",
+          color: "#E0E4E3"
         },
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
             size={30}
@@ -48,7 +51,7 @@ const HomeStack = createStackNavigator(
         ),
         headerRight: (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ paddingRight: 10, color: "#E0E4E3" }}
             onPress={() => {
               AsyncStorage.clear();
               navigation.dispatch(
@@ -74,11 +77,12 @@ const AlertStack = createStackNavigator(
       return {
         headerTitle: "Incidents Alert",
         headerStyle: {
-          backgroundColor: "#1fb7a0"
+          backgroundColor: "#256197",
+          color: "#E0E4E3"
         },
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
             size={30}
@@ -86,7 +90,7 @@ const AlertStack = createStackNavigator(
         ),
         headerRight: (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ paddingRight: 10, color: "#E0E4E3" }}
             onPress={() => navigation.navigate("Welcome")}
             name="md-log-out"
             size={30}
@@ -106,11 +110,12 @@ const ContactStack = createStackNavigator(
       return {
         headerTitle: "Contacts",
         headerStyle: {
-          backgroundColor: "#1fb7a0"
+          backgroundColor: "#256197",
+          color: "#E0E4E3"
         },
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
             size={30}
@@ -118,7 +123,7 @@ const ContactStack = createStackNavigator(
         ),
         headerRight: (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ paddingRight: 10, color: "#E0E4E3" }}
             onPress={() => navigation.navigate("Welcome")}
             name="md-log-out"
             size={30}
@@ -138,11 +143,12 @@ const AboutStack = createStackNavigator(
       return {
         headerTitle: "About",
         headerStyle: {
-          backgroundColor: "#1fb7a0"
+          backgroundColor: "#256197",
+          color: "#E0E4E3"
         },
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
             size={30}
@@ -150,7 +156,7 @@ const AboutStack = createStackNavigator(
         ),
         headerRight: (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ paddingRight: 10, color: "#E0E4E3" }}
             onPress={() => navigation.navigate("Welcome")}
             name="md-log-out"
             size={30}
@@ -171,11 +177,12 @@ const IncidentReportStack = createStackNavigator(
       return {
         headerTitle: "Incident Report",
         headerStyle: {
-          backgroundColor: "#1fb7a0"
+          backgroundColor: "#256197",
+          color: "#E0E4E3"
         },
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
             size={30}
@@ -183,7 +190,7 @@ const IncidentReportStack = createStackNavigator(
         ),
         headerRight: (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ paddingRight: 10, color: "#E0E4E3" }}
             onPress={() => {
               AsyncStorage.clear();
               navigation.navigate("Welcome");
@@ -207,11 +214,12 @@ const NearByStack = createStackNavigator(
       return {
         headerTitle: "Nearby Services",
         headerStyle: {
-          backgroundColor: "#1fb7a0"
+          backgroundColor: "#256197",
+          color: "#E0E4E3"
         },
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
             size={30}
@@ -219,7 +227,7 @@ const NearByStack = createStackNavigator(
         ),
         headerRight: (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ paddingRight: 10, color: "#E0E4E3" }}
             onPress={() => navigation.navigate("Welcome")}
             name="md-log-out"
             size={30}
@@ -240,11 +248,12 @@ const IncidentHistoryStack = createStackNavigator(
       return {
         headerTitle: "Case History",
         headerStyle: {
-          backgroundColor: "#1fb7a0"
+          backgroundColor: "#256197",
+          color: "#E0E4E3"
         },
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
             size={30}
@@ -252,7 +261,7 @@ const IncidentHistoryStack = createStackNavigator(
         ),
         headerRight: (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ paddingRight: 10, color: "#E0E4E3" }}
             onPress={() =>
               navigation.dispatch(
                 NavigationActions.navigate({ routeName: "Welcome" })
@@ -278,11 +287,12 @@ const ProfileStack = createStackNavigator(
       return {
         headerTitle: "Profile",
         headerStyle: {
-          backgroundColor: "#1fb7a0"
+          backgroundColor: "#256197",
+          color: "#E0E4E3"
         },
         headerLeft: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.openDrawer()}
             name="md-menu"
             size={30}
@@ -290,7 +300,7 @@ const ProfileStack = createStackNavigator(
         ),
         headerRight: (
           <Icon
-            style={{ paddingLeft: 10 }}
+            style={{ paddingLeft: 10, color: "#E0E4E3" }}
             onPress={() => navigation.navigate("Welcome")}
             name="md-log-out"
             size={30}
@@ -447,7 +457,9 @@ const AppDrawerNavigator = createDrawerNavigator({
 const AppSwitchNavigator = createSwitchNavigator({
   Welcome: { screen: WelcomeScreen },
   Dashboard: { screen: AppDrawerNavigator },
-  Auth: { screen: AuthStack }
+  SignUp: { screen: SignUp },
+  Password: { screen: Password }
+  // Auth: { screen: AuthStack }
 });
 const AppContainer = createAppContainer(AppSwitchNavigator);
 

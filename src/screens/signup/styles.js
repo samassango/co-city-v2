@@ -99,5 +99,6 @@ export default {
   },
   backToLogin: {
     margin: 10
-  }
+  },
+  signupBtn: { alignSelf: "center" }
 };

@@ -69,6 +69,22 @@ class ReportingIncident extends React.Component {
     tshwaneUserId: null
   };
 
+  static navigationOptions = ({ navigation, navigationOptions }) => {
+    const { params } = navigation.state;
+
+    return {
+      /* These values are used instead of the shared configuration! */
+      headerLeft: (
+        <Icon
+          style={{ paddingLeft: 10, color: "#E0E4E3" }}
+          onPress={() => navigation.navigate("IncidentReport")}
+          name="arrow-back"
+          size={30}
+        />
+      )
+    };
+  };
+
   componentWillMount() {
     this.setState({
       accessToken: this.props.currentUser.id,

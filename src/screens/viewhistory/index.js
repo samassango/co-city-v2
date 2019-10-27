@@ -46,6 +46,21 @@ class ViewHistory extends React.Component {
       statusLog: null
     };
   }
+  static navigationOptions = ({ navigation, navigationOptions }) => {
+    const { params } = navigation.state;
+
+    return {
+      /* These values are used instead of the shared configuration! */
+      headerLeft: (
+        <Icon
+          style={{ paddingLeft: 10, color: "#E0E4E3" }}
+          onPress={() => navigation.navigate("IncidentHistory")}
+          name="arrow-back"
+          size={30}
+        />
+      )
+    };
+  };
 
   componentDidMount() {
     console.log(this.props.currentUser);

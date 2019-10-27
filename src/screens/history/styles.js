@@ -92,11 +92,11 @@ export default {
   listContainer: {
     paddingRight: 10,
     paddingTop: 5,
-    paddingBottom: 5,
+    paddingBottom: 20,
     left: -3
   },
   card: {
     marginTop: 5,
-    marginBottom: 5,
+    marginBottom: 5
   }
 };

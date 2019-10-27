@@ -5,7 +5,8 @@ const initialState = {
   isLoaded: false,
   error: null,
   user: null,
-  suburbs: null
+  suburbs: null,
+  passwordResetObj: null
 };
 
 const Signup = (state = initialState, { type, payload } = actions) => {
@@ -44,6 +45,11 @@ const Signup = (state = initialState, { type, payload } = actions) => {
     case constants.LOAD_LIST_OF_PLACES_REQUEST_ERROR:
       return { ...state, isLoading: false, error: payload };
 
+    case constants.LOAD_PASSWORD_RESET_REQUEST_SUCCESS:
+      return { ...state, passwordReset: payload };
+
+    case constants.LOAD_PASSWORD_RESET_REQUEST_ERROR:
+      return { ...state, resetError: payload };
     default:
       return state;
   }

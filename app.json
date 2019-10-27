@@ -33,10 +33,10 @@
       "bundleIdentifier": "za.co.pulego.cocity",
       "supportsTablet": true
     },
-    "androidStatusBarColor": "#018c6f",
+    "androidStatusBarColor": "#256197",
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#018c6f"
+      "backgroundColor": "#256197"
     },
     "android": {
       "package": "za.co.pulego.cocity",

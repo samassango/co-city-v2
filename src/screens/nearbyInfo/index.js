@@ -34,7 +34,7 @@ class NearbyInfo extends Component {
   componentDidMount() {}
 
   _handleDirectionNavigator = async () => {
-    const { marker, destinationVicinity } = this.props.navigation.getParams(
+    const { marker, destinationVicinity } = this.props.navigation.getParam(
       "params",
       null
     );
@@ -57,7 +57,8 @@ class NearbyInfo extends Component {
   };
 
   _handleCallService() {
-    const { typeObject } = this.props.navigation.getParams("params", null);
+    const { typeObject } = this.props.navigation.getParam("params", null);
+    console.log(typeObject)
     const args = {
       number: typeObject.contact,
       prompt: false

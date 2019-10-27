@@ -48,6 +48,21 @@ class AlertView extends React.Component {
       active: "true"
     };
   }
+  static navigationOptions = ({ navigation, navigationOptions }) => {
+    const { params } = navigation.state;
+
+    return {
+      /* These values are used instead of the shared configuration! */
+      headerLeft: (
+        <Icon
+          style={{ paddingLeft: 10, color: "#E0E4E3" }}
+          onPress={() => navigation.navigate("IncidentAlert")}
+          name="arrow-back"
+          size={30}
+        />
+      )
+    };
+  };
 
   componentDidMount() {
     const notification = this.props.navigation.getParam("params", null);
@@ -65,8 +80,10 @@ class AlertView extends React.Component {
     this.setState({ open: false });
   }
   render() {
-    let detailObject = this.props.notifications.notificationData[0];
-    // console.log("detailObject>>", detailObject);
+    let detailObject = this.props.notifications.notificationData
+      ? this.props.notifications.notificationData[0]
+      : null;
+    console.log("detailObject>>", this.props.notifications.notificationData);
     return (
       <Container>
         <ImageBackground
@@ -74,7 +91,7 @@ class AlertView extends React.Component {
           style={styles.container}
         >
           <Content showsVerticalScrollIndicator={false}>
-            {!!this.props.notifications.notificationData ? (
+            {!!detailObject ? (
               <View style={styles.cardContainer}>
                 <Card style={styles.card}>
                   <CardItem>

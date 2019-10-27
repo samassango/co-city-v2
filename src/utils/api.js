@@ -1,5 +1,6 @@
 export const apiRequest = {
-  baseUrl: "https://tshwanesafetyapi.herokuapp.com/api",
+  // baseUrl: "https://tshwanesafetyapi.herokuapp.com/api",
+  baseUrl:"http://196.33.249.226:4400/api",
   user: {
     login: "/TshwaneUsers/login",
     logout: "/TshwaneUsers/logout",
@@ -79,3 +80,4 @@ export function googleApiDirectionsRequest(
 }
 
 //https://tshwanesafetyapi.herokuapp.com/explorer/
+// 'http://196.33.249.226:4400/api'
